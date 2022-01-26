@@ -1,1 +1,21 @@
 ##### i am going to write the yaml file for creating a sample pod using the docker hub images
+
+apiVersion: v1
+kind: Pod
+metadata : 
+  name: "redispod1234" # this name could be anything, the name can't have spaces between them
+  labels:
+    reason: caching # we put labels to refer to the pods through other kubernetes objects
+    reason2: texting
+    
+
+spec:
+  containers: 
+    - name: cache-for-state-apps # again this name can be anything. This is not the name of pod but is the name of container inside the pod
+      image: redis # this can be the image from docker hub which are public. for private images we need to specify the full path 
+      ports:
+        - containerPort: 90 # port of the container where we want the container to run
+          name: caching 
+
+
+### For creating the pod from deployment file, we need to run the command kubectl apply -f <File_name>
